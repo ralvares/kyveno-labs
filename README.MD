@@ -63,20 +63,26 @@ spec:
               - Pod
       verifyImages:
       - imageReferences:
-        - "quay.io/repository/image:*"
+        - "quay.io/vuln/pacman:*"
         attestors:
         - entries:
           - keys:
               publicKeys: |-
                 -----BEGIN PUBLIC KEY-----
-                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE6MBoAFnYBoFX4Jnbsv3UghAJY+Eh
-                T2qxR4zpI58cRhDtlFJzf/4fuwQOe2K/Y2HwmgP7k5cRas3vc92TmNTPgg==
-                -----END PUBLIC KEY-----                
+                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEU40wqoqgzPSCrbTs8IWdsvJ2XnT3
+                PB7V0jFXlkMR/h2z489GNLbrqDzHzt8CIrdmgDLSITEDlDVTO8MjRrWAQQ==
+                -----END PUBLIC KEY-----
         attestations:
         - predicateType: https://quay.io/api/v1/
           conditions:
           - all:
-            - key: "{{data.Layer.Features[].Vulnerabilities[].Severity | (contains(@, 'High') || contains(@, 'Critical'))}}"
+            - key: "{{data.Layer.Features[].Vulnerabilities[].Severity | (contains(@, 'Critical'))}}"
               operator: Equals
               value: False
+            - key: "{{data.Layer.Features[].Name | (contains(@, 'ubi8'))}}"
+              operator: Equals
+              value: True
+            - key: "{{data.Layer.Features[].Version | (contains(@, '8.6-903.1661794351'))}}"
+              operator: Equals
+              value: True
 ```
