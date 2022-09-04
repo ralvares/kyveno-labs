@@ -43,7 +43,7 @@ To sign attestations, use the cosign attest command. This command will sign your
 cosign attest quay.io/repository/image:label --key cosign.key --predicate scan.json --type https://quay.io/api/v1/
 ```
 
-## Kyverno Policy to block any container image that Contain High or Critical Vulnerabilities
+## Kyverno Policy to block any container image that Contain Critical Vulnerabilities and ubi8 version 8.6-903.1661794351
 
 ```
 apiVersion: kyverno.io/v1
