@@ -49,13 +49,13 @@ cosign attest quay.io/repository/image:label --key cosign.key --predicate scan.j
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: check-vulnerabilities
+  name: check-vulnerabilities-ubi8-baseimage
 spec:
   validationFailureAction: enforce
   webhookTimeoutSeconds: 10
   failurePolicy: Fail
   rules:
-    - name: Contain-High-or-Critical-Vulnerabilities
+    - name: Contain-Critical-Vulnerabilities-or-Wrong-Base-Image
       match:
         any:
         - resources:
